@@ -8,11 +8,10 @@ qt_standard_project_setup()
 qt_add_executable(MagicMatrix
     WIN32 MACOSX_BUNDLE
     main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
+    ui/mainwindow.cpp
+    ui/mainwindow.h
+    ui/mainwindow.ui
 )
-
 target_link_libraries(MagicMatrix
     PRIVATE
         Qt::Core
