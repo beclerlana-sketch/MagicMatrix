@@ -16,7 +16,7 @@ public :
 private:
     bool isValidIndex (int index) const ; // check if the cell index is in the valid range
     bool isValidValue(int value) const;
-    BoardSnapShot m_snapshot; // helps  stores the data inside the class
+    BoardSnapShot m_snapshot{}; // helps  stores the data inside the class
 
 
 

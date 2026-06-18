@@ -5,7 +5,7 @@
 
  struct BoardSnapShot
 {
-     std::array<int,  81 > values ;
+     std::array<int, 81> values {};
 };
 
 #endif // GAMETYPES_H

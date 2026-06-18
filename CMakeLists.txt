@@ -15,6 +15,9 @@ qt_add_executable(MagicMatrix
     ui/CellButton.cpp
     ui/MagicMatrixBoard.h
     ui/MagicMatrixBoard.cpp
+    core/GameTypes.h
+    core/MagicSquareBoard.h
+    core/MagicSquareBoard.cpp
 )
 target_link_libraries(MagicMatrix
     PRIVATE
