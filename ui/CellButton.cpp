@@ -1,21 +1,17 @@
 #include "CellButton.h"
+#include <QSizePolicy>
 
 CellButton::CellButton(int cellIndex, QWidget *parent)
-    : QPushButton(parent), matrix_digit(cellIndex)
+    : QPushButton(parent), matrix_cellIndex(cellIndex)
 {
     setMinimumSize(44, 44);
-    setCheckable(false);
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     connect(this, &QPushButton::clicked, this, [this]() {
         emit cellClicked(matrix_cellIndex);
     });
 
     updateAppearance();
-}
-
-int CellButton::cellIndex() const
-{
-    return matrix_cellIndex;
 }
 
 void CellButton::setDigit(int digit)
@@ -35,8 +31,23 @@ void CellButton::updateAppearance()
     setText(matrix_digit == 0 ? "" : QString::number(matrix_digit));
 
     if (matrix_highlighted) {
-        setStyleSheet("QPushButton { border: 2px solid #2f80ed; background: #dbeafe; font-size: 16px; }");
+        setStyleSheet(
+            "QPushButton {"
+            "background-color: #dbeafe;"
+            "border: 2px solid #2563eb;"
+            "font-size: 16px;"
+            "font-weight: bold;"
+            "color: #111827;"
+            "}"
+            );
     } else {
-        setStyleSheet("QPushButton { border: 1px solid #888; background: white; font-size: 16px; }");
+        setStyleSheet(
+            "QPushButton {"
+            "background-color: #ffffff;"
+            "border: 1px solid #9ca3af;"
+            "font-size: 16px;"
+            "color: #111827;"
+            "}"
+            );
     }
 }

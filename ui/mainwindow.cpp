@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    setMinimumSize(500, 500);
+
     auto *boardWidget = new MagicMatrixBoard(this);
     setCentralWidget(boardWidget);
 

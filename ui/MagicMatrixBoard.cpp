@@ -24,6 +24,7 @@ MagicMatrixBoard::MagicMatrixBoard(QWidget *parent)
             setHighlightedCell(clickedIndex);
             emit cellHighlighted(clickedIndex);
         });
+
     }
 };
 
