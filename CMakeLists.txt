@@ -11,10 +11,10 @@ qt_add_executable(MagicMatrix
     ui/mainwindow.cpp
     ui/mainwindow.h
     ui/mainwindow.ui
-    core/GameTypes.h
-    core/MagicSquareBoard.h
-    core/MagicSquareBoard.cpp
-
+    ui/CellButton.h
+    ui/CellButton.cpp
+    ui/MagicMatrixBoard.h
+    ui/MagicMatrixBoard.cpp
 )
 target_link_libraries(MagicMatrix
     PRIVATE
