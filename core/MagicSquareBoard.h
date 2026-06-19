@@ -10,7 +10,7 @@ public :
     static constexpr int EmptyValue = 0;
     int valueAt( int index)  const ; // it will resturn the value  stored in the cell
     bool setValue ( int index, int value ); // this will check the number placed in the cell and check if accepted it w will return true or else a false
-    bool claerValue ( int index );
+    bool clearValue ( int index );
     BoardSnapShot snapshot() const ;
 
 private:

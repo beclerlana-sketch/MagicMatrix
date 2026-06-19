@@ -14,7 +14,7 @@ bool MagicSquareBoard:: setValue(int index, int value){
 m_snapshot.values[index] = value;
     return true;
 }
-bool MagicSquareBoard::claerValue(int index){
+bool MagicSquareBoard::clearValue(int index){
     if(!isValidIndex(index))
     return false ;
 m_snapshot.values[index] = EmptyValue;

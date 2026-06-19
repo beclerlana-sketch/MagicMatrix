@@ -3,6 +3,7 @@
 
 #include "MagicMatrixBoard.h"
 #include "../core/MagicSquareBoard.h"
+#include "../session/GameSession.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,17 +15,19 @@ MainWindow::MainWindow(QWidget *parent)
 
     auto *boardWidget = new MagicMatrixBoard(this);
     setCentralWidget(boardWidget);
+    auto *session = new GameSession(this);
 
-    MagicSquareBoard board;
-    board.setValue(0, 1);
-    board.setValue(10, 55);
-    board.setValue(80, 81);
+    connect(session, &GameSession::boardChanged, this,
+            [boardWidget](const BoardSnapShot &snapshot) {
+                for (int index = 0; index < MagicSquareBoard::CellCount; ++index) {
+                    boardWidget->setCellValue(index, snapshot.values[index]);
+                }
+            });
 
-    BoardSnapShot snapshot = board.snapshot();
+    session->setCellValue(0, 1);
+    session->setCellValue(10, 55);
+    session->setCellValue(80, 81);
 
-    for (int index = 0; index < MagicSquareBoard::CellCount; ++index) {
-        boardWidget->setCellValue(index, snapshot.values[index]);
-    }
 
 
 
