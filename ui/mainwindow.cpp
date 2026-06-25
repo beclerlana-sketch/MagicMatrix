@@ -14,10 +14,6 @@ MainWindow::MainWindow(QWidget *parent)
     auto *boardWidget = new MagicMatrixBoard(this);
     setCentralWidget(boardWidget);
 
-    boardWidget->setCellValue(0, 1);
-    boardWidget->setCellValue(10, 55);
-    boardWidget->setCellValue(80, 81);
-
 
 }
 
