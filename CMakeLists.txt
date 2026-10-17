@@ -20,6 +20,8 @@ qt_add_executable(MagicMatrix
     core/MagicSquareBoard.cpp
     session/GameSession.h
     session/GameSession.cpp
+    core/MagicSquareRules.h
+    core/MagicSquareRules.cpp
 )
 target_link_libraries(MagicMatrix
     PRIVATE

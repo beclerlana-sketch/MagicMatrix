@@ -30,7 +30,7 @@ bool MagicSquareBoard::isValidIndex(int index) const
 }
 bool MagicSquareBoard::isValidValue(int value) const
 {
-    return value >= 1 && value <= 81;
+    return value >= 1 && value <= 9;
 }
 
 
