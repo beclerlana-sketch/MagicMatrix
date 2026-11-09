@@ -24,6 +24,7 @@ signals:
 protected:
     void paintEvent(QPaintEvent *event) override; //draws everything mannually
     void mousePressEvent(QMouseEvent *event) override; //handles clicks
+    void keyPressEvent(QKeyEvent *event) override; //handles keyboard input, fe: pressed 5 -> writes into selected cell
 
 private:
     //static -> shared by all objects, constexpr -> known at compile time
