@@ -146,4 +146,10 @@ void MagicMatrixBoard::keyPressEvent(QKeyEvent *event)
         matrix_values[matrix_HighlightedIndex] = digit;
         update();
     }
+
+    if (event->key() == Qt::Key_Delete || event->key() == Qt::Key_Backspace) //delete value from selected cell
+    {
+        matrix_values[matrix_HighlightedIndex] = 0;
+        update();
+    }
 }
