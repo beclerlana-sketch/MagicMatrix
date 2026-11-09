@@ -13,6 +13,11 @@ MagicMatrixBoard::MagicMatrixBoard(QWidget *parent)
     setFocusPolicy(Qt::StrongFocus); //allow widget to recieve keyboard input
 }
 
+void MagicMatrixBoard::setSession(GameSession *session)
+{
+    m_session = session;
+}
+
 QSize MagicMatrixBoard::sizeHint() const
 {
     return QSize(600, 600); //board can be big till this size
@@ -143,13 +148,17 @@ void MagicMatrixBoard::keyPressEvent(QKeyEvent *event)
     if (event->key() >= Qt::Key_1 && event->key() <= Qt::Key_9) //check if user pressed digit 1 to 9
     {
         int digit = event->key() - Qt::Key_0; //converts key into number, pressed 5 becomes key[5] - 0, which is 5 num
-        matrix_values[matrix_HighlightedIndex] = digit;
-        update();
+        if (m_session)
+        {
+            m_session->setCellValue(matrix_HighlightedIndex, digit);
+        }
     }
 
     if (event->key() == Qt::Key_Delete || event->key() == Qt::Key_Backspace) //delete value from selected cell
     {
-        matrix_values[matrix_HighlightedIndex] = 0;
-        update();
+        if (m_session)
+        {
+            m_session->clearCell(matrix_HighlightedIndex);
+        }
     }
 }

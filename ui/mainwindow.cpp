@@ -1,9 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 #include "MagicMatrixBoard.h"
 #include "../core/MagicSquareBoard.h"
 #include "../session/GameSession.h"
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     auto *boardWidget = new MagicMatrixBoard(this); //creates the board
     setCentralWidget(boardWidget); //the board sets in the middle of mainwindow
     auto *session = new GameSession(this); //creates the logic manager
+    boardWidget->setSession(session);
 
     connect(session, &GameSession::boardChanged, this, //whenever GameSession changed values, board updates auto
             [boardWidget](const BoardSnapShot &snapshot) {
@@ -24,13 +25,9 @@ MainWindow::MainWindow(QWidget *parent)
                 }
             });
 
-    //these are just test values for a moment
-    session->setCellValue(0, 1);
-    session->setCellValue(10, 55);
-    session->setCellValue(80, 81);
-
-
-
+    connect(session, &GameSession::invalidMove, this, [this](const QString &message) {
+        QMessageBox::warning(this, "MagicMatrix: Error", message);
+    });
 
 }
 
