@@ -1,5 +1,6 @@
 #include "MagicMatrixBoard.h"
 #include <QMouseEvent>
+#include <QKeyEvent>
 #include <QPainter>
 #include <QSizePolicy>
 
@@ -8,6 +9,13 @@ MagicMatrixBoard::MagicMatrixBoard(QWidget *parent)
 {
     setMinimumSize(540, 540);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding); //grow if window grows
+
+    setFocusPolicy(Qt::StrongFocus); //allow widget to recieve keyboard input
+}
+
+void MagicMatrixBoard::setSession(GameSession *session)
+{
+    m_session = session;
 }
 
 QSize MagicMatrixBoard::sizeHint() const
@@ -133,3 +141,24 @@ void MagicMatrixBoard::mousePressEvent(QMouseEvent *event) //this one is called 
     update(); //calls the above paint function, and updates
 }
 
+void MagicMatrixBoard::keyPressEvent(QKeyEvent *event)
+{
+    if (matrix_HighlightedIndex < 0) return; //before selected its -1(not selected), makes sure a cell is selected
+
+    if (event->key() >= Qt::Key_1 && event->key() <= Qt::Key_9) //check if user pressed digit 1 to 9
+    {
+        int digit = event->key() - Qt::Key_0; //converts key into number, pressed 5 becomes key[5] - 0, which is 5 num
+        if (m_session)
+        {
+            m_session->setCellValue(matrix_HighlightedIndex, digit);
+        }
+    }
+
+    if (event->key() == Qt::Key_Delete || event->key() == Qt::Key_Backspace) //delete value from selected cell
+    {
+        if (m_session)
+        {
+            m_session->clearCell(matrix_HighlightedIndex);
+        }
+    }
+}

@@ -3,18 +3,28 @@ GameSession::GameSession(QObject *parent):QObject(parent)// creates the game ses
 {
 
 }
+
 BoardSnapShot GameSession::boardsnapshot() const // the board getter
 {
     return m_board.snapshot();
 }
-void GameSession::setCellValue(int index , int value)
+
+void GameSession::setCellValue(int index, int value)
 {
     if(!m_board.setValue(index ,value)){ // incase of a wrong player move it will emit the signal
-        emit invalidMove("Invalid value");
+        emit invalidMove("Invalid value detected");
         return;
     }
+
+    if (!m_rules.hasAnyDuplicate(m_board.snapshot()))
+    {
+        emit invalidMove("Duplicate value detected");
+    }
+
     emit boardChanged(m_board.snapshot());
-}void GameSession::clearCell(int index)
+}
+
+void GameSession::clearCell(int index)
 {
     if(!m_board.clearValue(index)){
         emit invalidMove("Invalid cell");

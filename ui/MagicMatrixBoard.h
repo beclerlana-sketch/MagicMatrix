@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "../session/GameSession.h"
 #include <QWidget>
 #include <QRect>
 #include <QSize>
@@ -16,6 +17,7 @@ public:
     explicit MagicMatrixBoard(QWidget *parent = nullptr);
 
     void setCellValue(int index, int value); //meaning board -> cell 5 gets value 7
+    void setSession(GameSession* session); //attach game session to board
     QSize sizeHint() const override;
 
 signals:
@@ -24,6 +26,7 @@ signals:
 protected:
     void paintEvent(QPaintEvent *event) override; //draws everything mannually
     void mousePressEvent(QMouseEvent *event) override; //handles clicks
+    void keyPressEvent(QKeyEvent *event) override; //handles keyboard input, fe: pressed 5 -> writes into selected cell
 
 private:
     //static -> shared by all objects, constexpr -> known at compile time
@@ -36,6 +39,8 @@ private:
     //std::array<int, 81> is a modern C++ container, std:: -> belongs to C++ sLibrary
     //the {} initializes every el {0,0,0,0..0}, starts as 0and even 80 starts as 0, without it we get garbage values (memory is loaded)
     int matrix_HighlightedIndex = -1;
+
+    GameSession* m_session = nullptr; //pointer to game logic/session
 };
 
 #endif // MAGICMATRIXBOARD_H
