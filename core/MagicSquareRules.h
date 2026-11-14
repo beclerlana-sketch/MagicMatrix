@@ -21,7 +21,7 @@ public:
        bool isComplete(const BoardSnapShot &board) const;
        bool isSolved(const BoardSnapShot &board) const;
    private:
-       bool isValidRowColumn(int index) const; // this checks waether th row / col index is 0-8.
+       bool isValidRowColumn(int index) const;
 };
 
 

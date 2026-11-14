@@ -3,12 +3,11 @@
 
 #include <QMainWindow>
 
-class GameSession;
-class MagicMatrixBoard;
-class QLabel;
-class QWidget;
-class QLineEdit;
-class QComboBox;
+QT_BEGIN_NAMESPACE
+namespace Ui {
+class MainWindow;
+}
+QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
@@ -16,23 +15,9 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow() override;
 
 private:
-    void startLevel();
-    void enterDigit(int digit);
-
-    GameSession *m_session;
-    MagicMatrixBoard *m_board;
-    QLabel *m_hearts;
-    QLabel *m_hints;
-    QLabel *m_message;
-    QLabel *m_equation;
-    QLabel *m_countdown;
-    QWidget *m_controls;
-    QWidget *m_rescue;
-    QLineEdit *m_answer;
-    QComboBox *m_difficulty;
-    int m_selected = -1;
+    Ui::MainWindow *ui;
 };
-
-#endif
+#endif // MAINWINDOW_H
