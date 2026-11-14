@@ -16,7 +16,7 @@ void GameSession::setCellValue(int index, int value)
         return;
     }
 
-    if (!m_rules.hasAnyDuplicate(m_board.snapshot()))
+    if (m_rules.hasAnyDuplicate(m_board.snapshot()))
     {
         emit invalidMove("Duplicate value detected");
     }

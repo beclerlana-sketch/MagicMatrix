@@ -145,6 +145,46 @@ void MagicMatrixBoard::keyPressEvent(QKeyEvent *event)
 {
     if (matrix_HighlightedIndex < 0) return; //before selected its -1(not selected), makes sure a cell is selected
 
+    if (event->key() == Qt::Key_Left) //arrow move selection to the left
+    {
+        if (matrix_HighlightedIndex % BoardSize > 0) //not already in 1st col
+        {
+            matrix_HighlightedIndex--;
+            update();
+        }
+        return;
+    }
+
+    if (event->key() == Qt::Key_Right) //arrow to the right
+    {
+        if (matrix_HighlightedIndex % BoardSize < BoardSize - 1) //not already in last col
+        {
+            matrix_HighlightedIndex++;
+            update();
+        }
+        return;
+    }
+
+    if (event->key() == Qt::Key_Up) //arrow to the up
+    {
+        if (matrix_HighlightedIndex >= BoardSize) //not already in frist row
+        {
+            matrix_HighlightedIndex -= BoardSize;
+            update();
+        }
+        return;
+    }
+
+    if (event->key() == Qt::Key_Down) //arrow to down
+    {
+        if (matrix_HighlightedIndex < CellCount - BoardSize) //not already in last row
+        {
+            matrix_HighlightedIndex += BoardSize;
+            update();
+        }
+        return;
+    }
+
     if (event->key() >= Qt::Key_1 && event->key() <= Qt::Key_9) //check if user pressed digit 1 to 9
     {
         int digit = event->key() - Qt::Key_0; //converts key into number, pressed 5 becomes key[5] - 0, which is 5 num

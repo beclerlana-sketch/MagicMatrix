@@ -25,9 +25,10 @@ MainWindow::MainWindow(QWidget *parent)
                 }
             });
 
-    connect(session, &GameSession::invalidMove, this, [this](const QString &message) {
-        QMessageBox::warning(this, "MagicMatrix: Error", message);
-    });
+    // //TEMPOPRARY TESTED, basically it just pop up warning for duplicate and etc. but it has bug inside anyway
+    // connect(session, &GameSession::invalidMove, this, [this](const QString &message) {
+    //     QMessageBox::warning(this, "MagicMatrix: Error", message);
+    // });
 
 }
 
