@@ -62,14 +62,30 @@ void MagicMatrixBoard::paintEvent(QPaintEvent *event) //is called whenever board
         const int row = matrix_HighlightedIndex / BoardSize; //10/9=r1
         const int column = matrix_HighlightedIndex %  BoardSize; //10%9=c1
 
-        QRect selectedRect( //creates rectangle
-            rect.left() + column * cellSize, //67+1*74
+        for (int column = 0; column < BoardSize; ++column) //highlight entire row
+        {
+            QRect rowRect(rect.left() + column * cellSize,
+                          rect.top() + row * cellSize, cellSize, cellSize);
+
+            painter.fillRect(rowRect, QColor("#eff6ff"));
+        }
+
+        for (int row = 0; row < BoardSize; ++row) //highlight entire column
+        {
+            QRect columnRect(rect.left() + column * cellSize,
+                             rect.top() + row * cellSize, cellSize, cellSize);
+
+            painter.fillRect(columnRect, QColor("#eff6ff"));
+        }
+
+        //draw selected cell on top
+        QRect selectedRect( //created rectangle
+            rect.left() + column * cellSize, //67 1*74
             rect.top() + row * cellSize, //17+1*74
             cellSize, //74
-            cellSize //74
-        ); //QRect -> 141,91,74,74
+            cellSize); //74 //QRect->141,91,74,74
 
-        painter.fillRect(selectedRect, QColor("#dbeafe")); //blue highlight, when the exactly square selected
+        painter.fillRect(selectedRect, QColor("#d6eaff")); //blue highlight, when the exactly square selected
     }
 
     QFont font = painter.font(); //gets current font from painter
@@ -97,7 +113,7 @@ void MagicMatrixBoard::paintEvent(QPaintEvent *event) //is called whenever board
     }
 
     for(int line = 0; line <= BoardSize; ++line) { //grid lines, we draw the board itself 0-9
-        const bool thickLine = line % 3 == 0; //always true for 1 and 3, it draws lines like | | |
+        const bool thickLine = line % 3 == 0; //always true for 0, 3, 6, 9, it draws lines like | | |
 
         QPen pen(thickLine ? QColor("#000000") : QColor("#a8a8a8"));
         pen.setWidth(thickLine ? 3 : 1);
